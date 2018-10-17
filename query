@@ -1,0 +1,95 @@
+ 
+ db.product.aggregate([
+    { $project: { name:1, price:1 } }
+])
+
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd83"), "name" : "Batman Lego Set", "price" : 9.99 }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd84"), "name" : "32 Piece Ratchet Set", "price" : 29.99 }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd85"), "name" : "Hammer", "price" : 5.99 }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd86"), "name" : "Toothpaste", "price" : 2.99 }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd87"), "name" : "Floss", "price" : 0.99 }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd88"), "name" : "Power Drill", "price" : 49.99 }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd89"), "name" : "120 Piece Lego Set", "price" : 12.99 }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd8a"), "name" : "Hot-wheels Car", "price" : 0.99 }
+
+//-------------------------------------------------------------------------------------------------
+
+db.product.find(
+    {}, { category: 1 }
+)
+
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd83"), "category" : "Toys" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd84"), "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd85"), "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd86"), "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd87"), "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd88"), "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd89") }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd8a") }
+
+//-------------------------------------------------------------------------------------------------
+
+db.product.find(
+    {}, {name: 1, category: 1 }
+)
+    
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd83"), "name" : "Batman Lego Set", "category" : "Toys" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd84"), "name" : "32 Piece Ratchet Set", "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd85"), "name" : "Hammer", "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd86"), "name" : "Toothpaste", "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd87"), "name" : "Floss", "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd88"), "name" : "Power Drill", "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd89"), "name" : "120 Piece Lego Set" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd8a"), "name" : "Hot-wheels Car" }
+
+//-------------------------------------------------------------------------------------------------
+
+db.product.find(
+    {}, { category: 1, company: 1 }
+)
+
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd83"), "company" : "LEGO", "category" : "Toys" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd84"), "company" : "Stanley", "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd85"), "company" : "Stanley", "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd86"), "company" : "Crest", "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd87"), "company" : "Crest", "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd88"), "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd89"), "company" : "LEGO" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd8a") }
+
+//-------------------------------------------------------------------------------------------------
+
+db.product.update(
+    { company: "Stanley" },
+    {
+      $set: { company: "Stanley Black and Decker" }
+    },
+    { multi: true }
+)
+
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd83"), "name" : "Batman Lego Set", "qty" : 1, "price" : 9.99, "company" : "LEGO", "category" : "Toys" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd84"), "company" : "Stanley Black and Decker" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd85"), "name" : "Hammer", "qty" : 5, "price" : 5.99, "company" : "Stanley Black and Decker", "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd86"), "name" : "Toothpaste", "qty" : 1, "price" : 2.99, "company" : "Crest", "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd87"), "name" : "Floss", "qty" : 0, "price" : 0.99, "company" : "Crest", "category" : "Health" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd88"), "name" : "Power Drill", "qty" : 5, "price" : 49.99, "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd89"), "name" : "120 Piece Lego Set", "qty" : 1, "price" : 12.99, "company" : "LEGO" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd8a"), "name" : "Hot-wheels Car", "qty" : 10, "price" : 0.99 }
+{ "_id" : ObjectId("5bc6e0e9c6685d323a57111e"), "name" : "Stanley Black and Decker" }
+
+//-------------------------------------------------------------------------------------------------
+
+db.product.find(
+    { price: { $gt: 10.00 } }
+)
+
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd88"), "name" : "Power Drill", "qty" : 5, "price" : 49.99, "category" : "Tools" }
+{ "_id" : ObjectId("5bc4b235b3fbb2cc596dbd89"), "name" : "120 Piece Lego Set", "qty" : 1, "price" : 12.99, "company" : "LEGO" }
+
+//-------------------------------------------------------------------------------------------------
+
+db.product.deleteMany({ company: "crest" })
+
+{ "acknowledged" : true, "deletedCount" : 0 }
+
+// failed to do what I thought
